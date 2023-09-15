@@ -8,10 +8,26 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
+    <h1>Etch-a-Sketch</h1>
+    <div class="pageContent">
 
-    <button id="size">Grid Size</button>
+        <div id="container"> 
 
-    <div id="container"> 
+        </div>
+
+        <div id="options">
+            <input type="color" id="colorpicker" value="#000000">
+            <button id="color">COLOR</button>
+            <button id="rainbow">RAINBOW</button>
+            <button id="eraser">ERASER</button>
+            <button id="clear">CLEAR</button>
+            
+            <div class="slidecontainer">
+                <p>canvas size</p>
+                    <input type="range" min="5" max="50" value="50" class="slider" id="myRange">
+                    <div id="output"></div>
+            </div>
+        </div>
 
     </div>
     
