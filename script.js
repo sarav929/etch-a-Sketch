@@ -1,5 +1,7 @@
 // set default values
  
+// set default values
+ 
 const defaultMode = 'color';
 const defaultColor = '#000000';
 const defaultSize = 16;
@@ -35,11 +37,6 @@ function createGrid(num) {
         container.insertAdjacentElement('beforeend', square);
     }
 }
-<<<<<<< HEAD
-
-// solid colour 
-=======
->>>>>>> 043f37b (refactor drawing and erasing functions with helper function to apply the style)
 
 function apply(boxes, attribute, value) {
     boxes.forEach((box) => {
@@ -57,57 +54,6 @@ function apply(boxes, attribute, value) {
 
 // solid color
 function draw() {
-<<<<<<< HEAD
-    const boxes = Array. from(document.getElementsByClassName('box'));
-    boxes.forEach((box) => {
-        box.addEventListener('mousedown', () => {
-            box.setAttribute('style', 'background-color:' + currentColor); 
-        });
-
-        box.addEventListener('mouseover', () => {
-            if (mouseDown) {
-                box.setAttribute('style', 'background-color:' + currentColor); 
-            }
-        });
-    });
-}
-
-// erase 
-
-function erase() {
-    const boxes = Array. from(document.getElementsByClassName('box'));
-    boxes.forEach((box) => {
-        box.addEventListener('mousedown', () => {
-            box.setAttribute('style', 'background-color: transparent');  
-        });
-
-        box.addEventListener('mouseover', () => {
-            if (mouseDown) {
-                box.setAttribute('style', 'background-color: transparent');  
-            }
-        });
-    });
-}
-
-// rainbow colour
-
-function rainbow() {
-    const boxes = Array. from(document.getElementsByClassName('box'));
-    let randomColor;
-    boxes.forEach((box) => {
-        box.addEventListener('mousedown', () => {
-            randomColor = Math.floor(Math.random()*16777215).toString(16);
-            box.setAttribute('style', 'background-color: #' + randomColor);   
-        });
-
-        box.addEventListener('mouseover', () => {
-            if (mouseDown) {
-                randomColor = Math.floor(Math.random()*16777215).toString(16);
-                box.setAttribute('style', 'background-color: #' + randomColor);  
-            }
-        });
-    });
-=======
     const boxes = Array.from(document.getElementsByClassName('box'));
     let attribute = 'style';
     let value = () => `background-color: ${currentColor}`;
@@ -131,8 +77,9 @@ function rainbow() {
         return `background-color: ${randomColour}`;
     };
     apply(boxes, attribute, value);
->>>>>>> 043f37b (refactor drawing and erasing functions with helper function to apply the style)
 }
+
+//clear grid 
 
 //clear grid 
 
@@ -145,6 +92,7 @@ function clearGrid() {
 
 // color picker
 
+
 function pickColor() {
     const colorPicker = document.getElementById('colorpicker');
 
@@ -154,6 +102,7 @@ function pickColor() {
 }
 
 // start page with default values
+
 
 let currentMode = defaultMode;
 let currentColor = defaultColor;
@@ -165,11 +114,13 @@ pickColor();
 
 // pick canvas size with slider
 
+
 slider.oninput = function() {
     output.innerText = `${slider.value} x ${slider.value}`;
     currentSize = slider.value
     container.innerHTML = ''
     createGrid(currentSize)
+
     if (currentMode === 'color') {
         draw();
     } else if (currentMode === 'eraser') {
@@ -183,6 +134,7 @@ slider.oninput = function() {
 }
 
 // select mode
+
 
 const buttons = document.querySelectorAll('button')
 buttons.forEach((button) => {
