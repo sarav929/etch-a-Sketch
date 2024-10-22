@@ -1,5 +1,7 @@
 // set default values
  
+// set default values
+ 
 const defaultMode = 'color';
 const defaultColor = '#000000';
 const defaultSize = 16;
@@ -36,70 +38,60 @@ function createGrid(num) {
     }
 }
 
-// solid colour 
+function apply(boxes, attribute, value) {
+    boxes.forEach((box) => {
+        box.addEventListener('mousedown', () => {
+            box.setAttribute(attribute, value());
+        });
 
+        box.addEventListener('mouseover', () => {
+            if (mouseDown) {
+                box.setAttribute(attribute, value());
+            }
+        });
+    });
+}
+
+// solid color
 function draw() {
-    const boxes = Array. from(document.getElementsByClassName('box'));
-    boxes.forEach((box) => {
-        box.addEventListener('mousedown', () => {
-            box.setAttribute('style', 'background-color:' + currentColor); 
-        });
-
-        box.addEventListener('mouseover', () => {
-            if (mouseDown) {
-                box.setAttribute('style', 'background-color:' + currentColor); 
-            }
-        });
-    });
+    const boxes = Array.from(document.getElementsByClassName('box'));
+    let attribute = 'style';
+    let value = () => `background-color: ${currentColor}`;
+    apply(boxes, attribute, value);
 }
 
-// erase 
-
+// erase
 function erase() {
-    const boxes = Array. from(document.getElementsByClassName('box'));
-    boxes.forEach((box) => {
-        box.addEventListener('mousedown', () => {
-            box.setAttribute('style', 'background-color: transparent');  
-        });
-
-        box.addEventListener('mouseover', () => {
-            if (mouseDown) {
-                box.setAttribute('style', 'background-color: transparent');  
-            }
-        });
-    });
+    const boxes = Array.from(document.getElementsByClassName('box'));
+    let attribute = 'style';
+    let value = () => 'background-color: transparent';
+    apply(boxes, attribute, value);
 }
 
-// rainbow colour
-
+// rainbow color
 function rainbow() {
-    const boxes = Array. from(document.getElementsByClassName('box'));
-    let randomColor;
-    boxes.forEach((box) => {
-        box.addEventListener('mousedown', () => {
-            randomColor = Math.floor(Math.random()*16777215).toString(16);
-            box.setAttribute('style', 'background-color: #' + randomColor);   
-        });
-
-        box.addEventListener('mouseover', () => {
-            if (mouseDown) {
-                randomColor = Math.floor(Math.random()*16777215).toString(16);
-                box.setAttribute('style', 'background-color: #' + randomColor);  
-            }
-        });
-    });
+    const boxes = Array.from(document.getElementsByClassName('box'));
+    let attribute = 'style';
+    let value = () => {
+        let randomColour = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+        return `background-color: ${randomColour}`;
+    };
+    apply(boxes, attribute, value);
 }
+
+//clear grid 
 
 //clear grid 
 
 function clearGrid() {
     const boxes = Array. from(document.getElementsByClassName('box'));
     boxes.forEach((box) => {
-        box.setAttribute('style', 'background-color: none');       
+        box.setAttribute('style', 'background-color: transparent');       
         })
     };
 
 // color picker
+
 
 function pickColor() {
     const colorPicker = document.getElementById('colorpicker');
@@ -111,24 +103,38 @@ function pickColor() {
 
 // start page with default values
 
+
 let currentMode = defaultMode;
 let currentColor = defaultColor;
 let currentSize = defaultSize;
-output.innerText = currentSize + ' x ' + currentSize;
+output.innerText = `${currentSize} x ${currentSize}`;
 createGrid(currentSize);
 
 pickColor();
 
 // pick canvas size with slider
 
+
 slider.oninput = function() {
-    output.innerText = slider.value + ' x ' + slider.value
+    output.innerText = `${slider.value} x ${slider.value}`;
     currentSize = slider.value
     container.innerHTML = ''
     createGrid(currentSize)
+
+    if (currentMode === 'color') {
+        draw();
+    } else if (currentMode === 'eraser') {
+        erase();
+    } else if (currentMode === 'rainbow') {
+        rainbow();
+    } else if (currentMode === 'clear') {
+        clearGrid();
+    }
+    
 }
 
 // select mode
+
 
 const buttons = document.querySelectorAll('button')
 buttons.forEach((button) => {
