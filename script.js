@@ -158,7 +158,7 @@ function pickColor() {
 let currentMode = defaultMode;
 let currentColor = defaultColor;
 let currentSize = defaultSize;
-output.innerText = currentSize + ' x ' + currentSize;
+output.innerText = `${currentSize} x ${currentSize}`;
 createGrid(currentSize);
 
 pickColor();
@@ -166,10 +166,20 @@ pickColor();
 // pick canvas size with slider
 
 slider.oninput = function() {
-    output.innerText = slider.value + ' x ' + slider.value
+    output.innerText = `${slider.value} x ${slider.value}`;
     currentSize = slider.value
     container.innerHTML = ''
     createGrid(currentSize)
+    if (currentMode === 'color') {
+        draw();
+    } else if (currentMode === 'eraser') {
+        erase();
+    } else if (currentMode === 'rainbow') {
+        rainbow();
+    } else if (currentMode === 'clear') {
+        clearGrid();
+    }
+    
 }
 
 // select mode
