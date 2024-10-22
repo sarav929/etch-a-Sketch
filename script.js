@@ -35,10 +35,29 @@ function createGrid(num) {
         container.insertAdjacentElement('beforeend', square);
     }
 }
+<<<<<<< HEAD
 
 // solid colour 
+=======
+>>>>>>> 043f37b (refactor drawing and erasing functions with helper function to apply the style)
 
+function apply(boxes, attribute, value) {
+    boxes.forEach((box) => {
+        box.addEventListener('mousedown', () => {
+            box.setAttribute(attribute, value());
+        });
+
+        box.addEventListener('mouseover', () => {
+            if (mouseDown) {
+                box.setAttribute(attribute, value());
+            }
+        });
+    });
+}
+
+// solid color
 function draw() {
+<<<<<<< HEAD
     const boxes = Array. from(document.getElementsByClassName('box'));
     boxes.forEach((box) => {
         box.addEventListener('mousedown', () => {
@@ -88,6 +107,31 @@ function rainbow() {
             }
         });
     });
+=======
+    const boxes = Array.from(document.getElementsByClassName('box'));
+    let attribute = 'style';
+    let value = () => `background-color: ${currentColor}`;
+    apply(boxes, attribute, value);
+}
+
+// erase
+function erase() {
+    const boxes = Array.from(document.getElementsByClassName('box'));
+    let attribute = 'style';
+    let value = () => 'background-color: transparent';
+    apply(boxes, attribute, value);
+}
+
+// rainbow color
+function rainbow() {
+    const boxes = Array.from(document.getElementsByClassName('box'));
+    let attribute = 'style';
+    let value = () => {
+        let randomColour = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+        return `background-color: ${randomColour}`;
+    };
+    apply(boxes, attribute, value);
+>>>>>>> 043f37b (refactor drawing and erasing functions with helper function to apply the style)
 }
 
 //clear grid 
@@ -95,7 +139,7 @@ function rainbow() {
 function clearGrid() {
     const boxes = Array. from(document.getElementsByClassName('box'));
     boxes.forEach((box) => {
-        box.setAttribute('style', 'background-color: none');       
+        box.setAttribute('style', 'background-color: transparent');       
         })
     };
 
